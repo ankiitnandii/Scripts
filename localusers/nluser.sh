@@ -3,14 +3,14 @@
 # Enforces that it be executed with superuser (root) privileges.
 if [[ ${UID} -ne 0 ]]
 then
-        echo "You are not root. Please execute this script with root privileges"
+        echo "You are not root. Please execute this script with root privileges" >&2
         exit 1
 fi
 
 # Provides a usage statement much like you would find in a man page if the user does not supply an account name on the command line and returns an exit status of 1.
 if [[ "${#}" -lt 1 ]]
 then
-        echo "Usage: $0 <username> [comment]"
+        echo "Usage: $0 <username> [comment]" >&2
         exit 1
 fi
 
@@ -30,7 +30,7 @@ echo "${PASSWORD}" | passwd -e --stdin "${USERNAME}"
 if [ $? -eq 0 ]; then
     echo "User $USERNAME created successfully."
 else
-    echo "Failed to create user $USERNAME."
+    echo "Failed to create user $USERNAME." >&2
     exit 1
 fi
 
@@ -38,3 +38,6 @@ fi
 echo "The username for whom the account is created is: ${USERNAME}"
 echo "Generated password for user $USERNAME: $PASSWORD"
 echo "The host where the account is created is: ${HOSTNAME}"
+
+#Suppress all other commands.
+#We can do it by suppressing the error messages.
