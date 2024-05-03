@@ -1,1 +1,4 @@
 shellclass/*
+localusers/.vagrant/machines/*
+localusers/.vagrant/*
+localusers/.vagrant/machines/default/virtualbox/*
