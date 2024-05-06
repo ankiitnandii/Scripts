@@ -49,14 +49,14 @@ do
     uid=$(id -u ${account_name}) &>/dev/null
 
     # Refuses to disable or delete any accounts that have a UID less than 1,000.
-    if [[ uid -lt 1000 ]]
+    if [[ "${uid}" -lt 1000 ]]
     then
         echo 'You cannot delete this account' >&2
         exit 1
     fi
 # Remove the home directory
 
-if [ "$REMOVE" = true ]
+if [ "${REMOVE}" = true ]
 then
      if (rm -r /home/$account_name)
      then
@@ -70,7 +70,7 @@ fi
 
 #Deletes the user
 
-if [ "$DELETE" = true ]
+if [ "${DELETE}" = true ]
 then
     if (userdel $account_name)
     then

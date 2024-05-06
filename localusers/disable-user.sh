@@ -51,13 +51,15 @@ do
     uid=$(id -u ${account_name}) &>/dev/null
 
     # Refuses to disable or delete any accounts that have a UID less than 1,000.
-    if [[ uid -lt 1000 ]]
+    if [[ "${uid}" -lt 1000 ]]
     then
         echo 'You cannot delete this account' >&2
         exit 1
     fi
 
-    if [ "$DISABLE" = true ]
+    # Disable the account
+    
+    if [ "${DISABLE}" = true ]
     then	
         if (chage -E 0 $account_name)
         then
@@ -68,7 +70,9 @@ do
         fi
     fi
 
-    if [ "$REMOVE" = true ]
+    #Remove the home directory
+
+    if [ "${REMOVE}" = true ]
     then
         if (rm -r /home/$account_name)
         then
@@ -79,7 +83,9 @@ do
         fi
     fi
 
-    if [ "$ARCHIVE" = true ]
+    #Archive the home directory
+
+    if [ "${ARCHIVE}" = true ]
     then
 	mkdir archives &>/dev/null
         if tar -zcf archives/${account_name}.tar.gz /home/$account_name
