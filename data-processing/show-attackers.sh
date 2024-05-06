@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin:q/bash
 
 #Checks if the user has root privileges.
 
@@ -39,10 +39,11 @@ do
         echo "Number of attempts: $count" &>/dev/null
         echo "IP address: $ip" &>/dev/null
         echo "Location: $(geoiplookup $ip | awk -F': ' '{print $2}')" &>/dev/null
-        echo "-------------------------" &>/dev/null
+        echo "-------------------------" 
 
 #Produces output in CSV (comma-separated values) format with a header of "Count,IP,Location".
 
          echo "$count,$ip,$location" >> attackers.csv
       fi
 done
+exit 0
