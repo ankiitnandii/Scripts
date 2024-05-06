@@ -1,12 +1,4 @@
-#!/bin:q/bash
-
-#Checks if the user has root privileges.
-
-if [[ "${UID}" -ne 0 ]]
-then
-   echo "Permission denied. Please run with root privileges.Please contact system administrator" >&2
-   exit 1
-fi
+#!/bin/bash
 
 # Checks if a file is not provided
 if [[ -z "${1}" ]]
@@ -30,7 +22,7 @@ echo "Count,IP,Location" > attackers.csv
 
 # Extract IP addresses with failed SSH login attempts and count them
 LOCAL_FILE="${1}"
-grep 'Failed password' "${LOCAL_FILE}" | grep 'sshd' | awk '{print $(NF-3)}' | sort | uniq -c | sort -nr | while read count ip
+grep 'Failed password' "${LOCAL_FILE}" | awk '{print $(NF-3)}' | sort | uniq -c | sort -nr | while read count ip
 do
     # If there are more than 10 failed login attempts
     if [ $count -gt 10 ]
@@ -39,11 +31,11 @@ do
         echo "Number of attempts: $count" &>/dev/null
         echo "IP address: $ip" &>/dev/null
         echo "Location: $(geoiplookup $ip | awk -F': ' '{print $2}')" &>/dev/null
-        echo "-------------------------" 
+        echo "-------------------------" &>/dev/null
 
 #Produces output in CSV (comma-separated values) format with a header of "Count,IP,Location".
 
          echo "$count,$ip,$location" >> attackers.csv
-      fi
+      fi  
 done
 exit 0

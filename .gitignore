@@ -6,3 +6,6 @@ localusers/archives/*
 data-processing/attackers.csv
 data-processing/Vagrantfile
 data-processing/.vagrant/*
+data-processing/attacker.csv
+data-processing/attackers.csv
+data-processing/syslog-sample
