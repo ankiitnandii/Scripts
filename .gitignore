@@ -5,3 +5,4 @@ localusers/.vagrant/machines/default/virtualbox/*
 localusers/archives/*
 data-processing/attackers.csv
 data-processing/Vagrantfile
+data-processing/.vagrant/*
