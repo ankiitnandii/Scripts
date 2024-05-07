@@ -9,3 +9,6 @@ data-processing/.vagrant/*
 data-processing/attacker.csv
 data-processing/attackers.csv
 data-processing/syslog-sample
+networking/server
+networking/Servers
+networking/.vagrant/*
